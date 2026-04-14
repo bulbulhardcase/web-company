@@ -1,21 +1,26 @@
-/** Image URLs from Figma MCP export (time-limited CDN). */
+/**
+ * Photography: local assets in `/public` (production-ready).
+ * Icons / small UI: Figma MCP URLs until replaced with SVGs.
+ */
 export const assets = {
-  hero: "https://www.figma.com/api/mcp/asset/4921406a-151c-4d52-9689-1e32748cec6b",
+  /**
+   * Hero background — locked (brand-approved). Do not swap this file for other marketing photos
+   * unless product/stakeholders explicitly request a change; other sections may use different assets.
+   */
+  hero: "/hero-case.jpeg",
   logoNav: "https://www.figma.com/api/mcp/asset/5fcd3a04-7e31-4e1b-9706-b86d6610be7d",
   logoFooter: "https://www.figma.com/api/mcp/asset/fc065f33-c384-4bc0-b83d-b9d5feaf5cda",
-  productElectrical: "https://www.figma.com/api/mcp/asset/d69f7506-5c0c-4560-9046-537e09736ed3",
-  productCameras: "https://www.figma.com/api/mcp/asset/24dde080-6053-4dd6-aec0-45b0be55f3bd",
-  productIndustrial: "https://www.figma.com/api/mcp/asset/fd5f9ccc-fbfc-4f54-8c2e-5c12c94950eb",
-  productMusical: "https://www.figma.com/api/mcp/asset/4da91a66-587d-484f-8978-85305ac5c68f",
-  gradientHow1: "https://www.figma.com/api/mcp/asset/b25ecc61-f3fd-4d8e-b8d0-db0b4d5c6f0d",
-  gradientHow2: "https://www.figma.com/api/mcp/asset/06e3cf9c-7b7b-429a-b6ac-6e14d3bdd0c2",
-  gradientHow3: "https://www.figma.com/api/mcp/asset/1c5def33-80f7-4af7-a583-42db1ec2b42c",
-  gradientHow4: "https://www.figma.com/api/mcp/asset/7dff4c2d-e29a-4405-8ecd-56c2e51105d9",
-  ctaBottom: "https://www.figma.com/api/mcp/asset/5653bd04-decc-4765-934d-8c4fb5958f34",
+  productElectrical: "/product-medical-hf440.jpeg",
+  productCameras: "/product-drone-dji.jpeg",
+  productIndustrial: "/product-industrial-rack.jpeg",
+  productMusical: "/product-guitars.jpeg",
+  gradientHow1: "/how-01-instruments.jpeg",
+  gradientHow2: "/how-02-video-edit.jpeg",
+  gradientHow3: "/how-03-mavic-kit.jpeg",
+  gradientHow4: "/how-04-protected.jpeg",
+  ctaBottom: "/cta-ag-drone.jpeg",
   arrowRight: "https://www.figma.com/api/mcp/asset/196441bd-366a-4a21-9aff-48c64aaf393c",
   menuIcon: "https://www.figma.com/api/mcp/asset/089b8401-be79-4887-b18c-a84be5c9ea80",
-  chatBubble: "https://www.figma.com/api/mcp/asset/cbb268d0-e988-4f08-919f-6a43ef09d797",
-  chatIcon: "https://www.figma.com/api/mcp/asset/82987f7a-c0e8-468d-a1af-11352badf225",
   /** Figma node 109:1565 — customer support agent FAB */
   supportFabBg: "https://www.figma.com/api/mcp/asset/4fd8c13a-7a45-4bfe-9804-1d22ca20d809",
   supportFabIcon: "https://www.figma.com/api/mcp/asset/4e16ac55-dee6-4e60-b3c1-969a8a6aab63",

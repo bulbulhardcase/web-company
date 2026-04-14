@@ -2,7 +2,8 @@
 
 @theme {
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Syne", "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  /* Display stack matches sans for maximum legibility (single humanist sans family) */
+  --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
   --color-brand: #f84300;
   --color-surface: #0a0a0a;
   --color-surface-elevated: #0e0e0e;
@@ -12,6 +13,8 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -130,6 +133,29 @@ body::after {
   }
 }
 
+/* Hero → Problem: soft gradient + backdrop blur (feathered mask for smooth edge) */
+.hero-problem-bridge {
+  background: linear-gradient(
+    to bottom,
+    rgba(10, 10, 10, 0) 0%,
+    rgba(10, 10, 10, 0.12) 22%,
+    rgba(10, 10, 10, 0.45) 55%,
+    rgba(10, 10, 10, 0.88) 82%,
+    #0a0a0a 100%
+  );
+  -webkit-backdrop-filter: blur(14px) saturate(1.08);
+  backdrop-filter: blur(14px) saturate(1.08);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 10%, black 22%, black 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 10%, black 22%, black 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-problem-bridge {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+  }
+}
+
 /* Link underline sweep */
 .link-sweep {
   position: relative;
@@ -147,6 +173,10 @@ body::after {
   transform-origin: left;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.link-sweep:hover::after {
-  transform: scaleX(1);
+
+/* Hover-only underline: touch devices keep taps predictable (responsive-design / WCAG) */
+@media (hover: hover) and (pointer: fine) {
+  .link-sweep:hover::after {
+    transform: scaleX(1);
+  }
 }
