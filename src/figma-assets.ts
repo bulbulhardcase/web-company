@@ -8,7 +8,7 @@ export const assets = {
    * unless product/stakeholders explicitly request a change; other sections may use different assets.
    */
   hero: "/hero-case.jpeg",
-  logoNav: "https://www.figma.com/api/mcp/asset/5fcd3a04-7e31-4e1b-9706-b86d6610be7d",
+  logoNav: "/bulbul-hardcase-logo-header.png",
   logoFooter: "https://www.figma.com/api/mcp/asset/fc065f33-c384-4bc0-b83d-b9d5feaf5cda",
   productElectrical: "/product-medical-hf440.jpeg",
   productCameras: "/product-drone-dji.jpeg",
