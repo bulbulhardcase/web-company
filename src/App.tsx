@@ -97,7 +97,7 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
             <div className="relative h-14 w-44 shrink-0">
               <img alt="" className="pointer-events-none size-full object-contain" src={assets.logoNav} />
             </div>
-            <span className="font-display truncate text-base font-bold tracking-[0.02em]">Bulbul Hardcase</span>
+            
           </a>
 
           <nav className="hidden items-center gap-1 lg:flex" aria-label={t("navPrimary")}>
