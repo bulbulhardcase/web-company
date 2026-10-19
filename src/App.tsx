@@ -94,7 +94,7 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
           style={{ backgroundColor: scrolled ? "rgba(24,24,24,0.65)" : "rgba(171,171,171,0.1)" }}
         >
           <a href="#" className="flex min-w-0 flex-1 items-center gap-2.5 md:flex-none">
-            <div className="relative h-10 w-8 shrink-0">
+            <div className="relative h-12 w-36 shrink-0">
               <img alt="" className="pointer-events-none size-full object-contain" src={assets.logoNav} />
             </div>
             <span className="font-display truncate text-base font-bold tracking-[0.02em]">Bulbul Hardcase</span>
