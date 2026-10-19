@@ -95,7 +95,7 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
         >
           <a href="#" className="flex min-w-0 flex-1 items-center gap-2.5 md:flex-none">
             <div className="relative h-14 w-44 shrink-0">
-              <img alt="" className="pointer-events-none size-full object-contain" src={assets.logoNav} />
+              <img alt="Bulbul Hardcase" className="pointer-events-none h-full w-full object-fill" src={assets.logoNav} />
             </div>
             
           </a>
