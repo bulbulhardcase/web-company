@@ -1,7 +1,4 @@
-import { OpenRouter } from "@openrouter/sdk";
-import { fromChatMessages } from "@openrouter/sdk/lib/chat-compat.js";
-import { stepCountIs } from "@openrouter/sdk/lib/stop-conditions.js";
-import type { ChatMessages } from "@openrouter/sdk/models/chatmessages.js";
+
 import { stripMarkdownForChat } from "../src/chatPlainText.js";
 
 export type SimpleMessage = { role: "user" | "assistant"; content: string };
@@ -22,22 +19,18 @@ export type SupportAgentOptions = {
   apiKey: string;
   model?: string;
   instructions?: string;
-  maxSteps?: number;
 };
 
 export class SupportAgent {
-  private client: OpenRouter;
+  private readonly apiKey: string;
   private messages: SimpleMessage[] = [];
   private readonly model: string;
   private instructions: string;
-  private readonly maxSteps: number;
 
-  constructor(opts: SupportAgentOptions) {
-    this.client = new OpenRouter({ apiKey: opts.apiKey });
-    /** Default: OpenRouter Free Models Router — zero-cost, random free model (see https://openrouter.ai/docs/guides/routing/routers/free-router) */
+    constructor(opts: SupportAgentOptions) {
+    this.apiKey = opts.apiKey;
     this.model = opts.model ?? "openrouter/free";
     this.instructions = opts.instructions ?? DEFAULT_INSTRUCTIONS;
-    this.maxSteps = opts.maxSteps ?? 6;
   }
 
   getMessages(): SimpleMessage[] {
@@ -58,23 +51,56 @@ export class SupportAgent {
   }
 
   /** Non-streaming reply; suitable for HTTP JSON responses. */
-  async sendSync(userText: string): Promise<string> {
-    this.messages.push({ role: "user", content: userText });
+  
+async sendSync(userText: string): Promise<string> {
+  const history = [
+    ...this.messages,
+    { role: "user" as const, content: userText },
+  ];
 
-    const result = this.client.callModel({
-      model: this.model,
-      instructions: this.instructions,
-      input: fromChatMessages(this.messages as ChatMessages[]),
-      stopWhen: [stepCountIs(this.maxSteps)],
-    });
+  const response = await fetch(
+    "https://openrouter.ai/api/v1/chat/completions",
+    {
+      method: "POST",
+      headers: {
+       Authorization: `Bearer ${this.apiKey}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        model: this.model,
+        messages: [
+          { role: "system", content: this.instructions },
+          ...history,
+        ],
+      }),
+    }
+  );
 
-    const fullText = await result.getText();
-    const cleaned = stripMarkdownForChat(fullText);
-    this.messages.push({ role: "assistant", content: cleaned });
-    return cleaned;
+  if (!response.ok) {
+    const detail = await response.text();
+    throw new Error(`OpenRouter error ${response.status}: ${detail}`);
   }
+
+  const data = await response.json();
+  const fullText = data.choices?.[0]?.message?.content;
+
+  if (typeof fullText !== "string" || !fullText.trim()) {
+    throw new Error("OpenRouter returned an empty response");
+  }
+
+  const cleaned = stripMarkdownForChat(fullText);
+  this.messages.push(
+    { role: "user", content: userText },
+    { role: "assistant", content: cleaned }
+  );
+
+  return cleaned;
 }
 
-export function createSupportAgent(opts: SupportAgentOptions): SupportAgent {
+}
+
+export function createSupportAgent(
+  opts: SupportAgentOptions
+): SupportAgent {
   return new SupportAgent(opts);
 }
