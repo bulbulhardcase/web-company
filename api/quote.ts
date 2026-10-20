@@ -132,7 +132,7 @@ export default async function handler(req: any, res: any) {
         `Delivery destination: ${delivery_destination}`,
         `Delivery address: ${delivery_address || "-"}`,
         `Notes: ${notes || "-"}`,
-      ].join("\\n");
+      ].join("\n");
 
       try {
         const emailResponse = await fetch("https://api.resend.com/emails", {
