@@ -1,5 +1,8 @@
 const SUPABASE_URL = (process.env.SUPABASE_URL ?? "").replace(/\/+$/, "");
 const SUPABASE_SECRET_KEY = process.env.SUPABASE_SECRET_KEY ?? "";
+const RESEND_API_KEY = process.env.RESEND_API_KEY ?? "";
+const RESEND_FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "BulBul Hardcase <onboarding@resend.dev>";
+const QUOTE_NOTIFICATION_EMAIL = "bulbulhardcase@gmail.com";
 
 type QuoteBody = {
   customer_name?: unknown;
@@ -107,11 +110,64 @@ export default async function handler(req: any, res: any) {
       return res.status(502).json({ error: "Could not confirm quote request was saved." });
     }
 
+    let emailSent = false;
+    if (RESEND_API_KEY) {
+      const emailText = [
+        "New quote request received on bulbulhardcase.id",
+        "",
+        `Reference: #${saved.id}`,
+        `Submitted: ${saved.created_at}`,
+        "",
+        "CUSTOMER DETAILS",
+        `Name: ${customer_name}`,
+        `Email: ${customer_email}`,
+        `Phone: ${customer_phone || "-"}`,
+        "",
+        "QUOTE DETAILS",
+        `Equipment type: ${equipment_type}`,
+        `Dimensions: ${dimensions}`,
+        `Quantity: ${quantity}`,
+        `Foam / interior requirements: ${foam_requirements || "-"}`,
+        `Additional features: ${additional_features || "-"}`,
+        `Delivery destination: ${delivery_destination}`,
+        `Delivery address: ${delivery_address || "-"}`,
+        `Notes: ${notes || "-"}`,
+      ].join("\\n");
+
+      try {
+        const emailResponse = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: RESEND_FROM_EMAIL,
+            to: [QUOTE_NOTIFICATION_EMAIL],
+            subject: `New quote request #${saved.id}`,
+            text: emailText,
+          }),
+        });
+
+        if (emailResponse.ok) {
+          emailSent = true;
+        } else {
+          const details = await emailResponse.text();
+          console.error("[quote] Resend email failed:", emailResponse.status, details);
+        }
+      } catch (emailError) {
+        console.error("[quote] Resend request failed:", emailError);
+      }
+    } else {
+      console.error("[quote] RESEND_API_KEY is missing; quote saved without email notification");
+    }
+
     return res.status(201).json({
       ok: true,
       message: "Quote request saved successfully.",
       id: saved.id,
       created_at: saved.created_at,
+      emailSent,
     });
   } catch (error) {
     console.error("[quote] Request failed:", error);
