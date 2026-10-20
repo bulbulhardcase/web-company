@@ -1,11 +1,11 @@
 import { useEffect, useState, type ReactNode } from "react";
 import { assets } from "./figma-assets";
 import { SupportChat } from "./SupportChat";
+import { QuoteForm } from "./QuoteForm";
 import { Reveal } from "./Reveal";
 import { useScrollPast } from "./hooks/useScrollPast";
 import { useI18n } from "./i18n/I18nProvider";
 import { LanguageToggle } from "./i18n/LanguageToggle";
-import { useWhatsappQuoteHref } from "./i18n/useWhatsappHref";
 import type { Dictionary } from "./i18n/dictionary";
 
 const brand = "#f84300";
@@ -31,6 +31,7 @@ export default function App() {
         <ProductsSection />
         <HowItWorksSection />
         <CtaSection />
+        <QuoteForm />
         <Footer />
       </main>
       <SupportChat />
@@ -59,7 +60,6 @@ const navLinkKeys: { href: string; key: keyof Dictionary }[] = [
 
 function NavBar({ scrolled }: { scrolled: boolean }) {
   const { t } = useI18n();
-  const whatsappQuoteHref = useWhatsappQuoteHref();
   const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
@@ -119,9 +119,7 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
           <div className="flex shrink-0 items-center gap-2 md:gap-3">
             <LanguageToggle />
             <a
-              href={whatsappQuoteHref}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#quote"
               className="hidden px-4 py-2.5 text-center text-sm font-semibold text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-0.5 hover:shadow-[0_12px_32px_-10px_rgba(248,67,0,0.55)] sm:inline-block"
               style={{ backgroundColor: brand }}
             >
@@ -170,9 +168,7 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
               ))}
               <li className="mt-4 border-t border-white/10 pt-4">
                 <a
-                  href={whatsappQuoteHref}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#quote"
                   className="inline-flex w-full items-center justify-center rounded-[5px] px-4 py-3 text-sm font-semibold text-white transition-[transform,box-shadow] hover:shadow-[0_12px_32px_-10px_rgba(248,67,0,0.55)]"
                   style={{ backgroundColor: brand }}
                   onClick={() => setMobileOpen(false)}
@@ -488,7 +484,6 @@ function HowItWorksSection() {
 
 function CtaSection() {
   const { t } = useI18n();
-  const whatsappQuoteHref = useWhatsappQuoteHref();
   return (
     <section id="custom" className="relative scroll-mt-28 overflow-hidden py-28 md:py-[128px]" data-node-id="74:173">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -506,9 +501,7 @@ function CtaSection() {
           <h2 className="font-display text-4xl font-bold md:text-[50px] md:leading-[1.1]">{t("ctaTitle")}</h2>
           <p className="max-w-[388px] text-base leading-[22px] text-white/88">{t("ctaBody")}</p>
           <a
-            href={whatsappQuoteHref}
-            target="_blank"
-            rel="noopener noreferrer"
+            href="#quote"
             className="inline-flex min-w-[240px] items-center justify-center rounded-[5px] border border-solid px-8 py-[17px] text-lg font-semibold tracking-[0.2px] text-white transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-[0_20px_50px_-14px_rgba(248,67,0,0.55)]"
             style={{ backgroundColor: brand, borderColor: brand }}
             aria-label={t("ctaButtonAria")}
@@ -587,9 +580,6 @@ function Footer() {
           </nav>
         </div>
       </Shell>
-      <div id="quote" className="sr-only" aria-hidden>
-        Quote anchor
-      </div>
     </footer>
   );
 }
