@@ -81,8 +81,10 @@ async sendSync(userText: string): Promise<string> {
     throw new Error(`OpenRouter error ${response.status}: ${detail}`);
   }
 
+  
   const data = await response.json();
-  const fullText = data.choices?.[0]?.message?.content;
+  const message = data.choices?.[0]?.message;
+  const fullText = message?.content;
 
   console.log("[OpenRouter response]", JSON.stringify(data, null, 2));
 
@@ -91,6 +93,7 @@ async sendSync(userText: string): Promise<string> {
   }
 
   const cleaned = stripMarkdownForChat(fullText);
+
   this.messages.push(
     { role: "user", content: userText },
     { role: "assistant", content: cleaned }
