@@ -84,6 +84,8 @@ async sendSync(userText: string): Promise<string> {
   const data = await response.json();
   const fullText = data.choices?.[0]?.message?.content;
 
+  console.log("[OpenRouter response]", JSON.stringify(data, null, 2));
+
   if (typeof fullText !== "string" || !fullText.trim()) {
     throw new Error("OpenRouter returned an empty response");
   }
