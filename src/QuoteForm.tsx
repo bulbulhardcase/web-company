@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, type ReactNode } from "react";
 import { useI18n } from "./i18n/I18nProvider";
 
 const inputClass =
@@ -152,7 +152,7 @@ export function QuoteForm() {
   );
 }
 
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
+function Field({ label, children }: { label: string; children: ReactNode }) {
   return (
     <label className="flex min-w-0 flex-col gap-2 text-sm text-white/80">
       <span>{label}</span>
