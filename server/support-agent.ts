@@ -92,14 +92,19 @@ async sendSync(userText: string): Promise<string> {
     throw new Error("OpenRouter returned an empty response");
   }
 
-  const cleaned = stripMarkdownForChat(fullText);
+  
+const cleaned = stripMarkdownForChat(fullText);
 
-  this.messages.push(
-    { role: "user", content: userText },
-    { role: "assistant", content: cleaned }
-  );
+const finalReply = cleaned
+  .replace(/^\s*(User Safety|Response Safety)\s*:\s*.*$/gim, "")
+  .trim();
 
-  return cleaned;
+this.messages.push(
+  { role: "user", content: userText },
+  { role: "assistant", content: finalReply }
+);
+
+return finalReply;
 }
 
 }
