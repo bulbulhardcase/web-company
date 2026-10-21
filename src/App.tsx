@@ -539,8 +539,15 @@ function Footer() {
         <Reveal className="flex min-w-0 flex-1 flex-col gap-10" delayMs={0}>
           <div className="space-y-10">
             <div className="flex items-center gap-3">
-              <div className="relative h-14 w-11 shrink-0">
-                <img alt="" className="size-full object-contain" src={assets.logoFooter} />
+              <div className="relative h-14 w-44 shrink-0">
+                <img
+                  alt="Bulbul Hardcase"
+                  className="size-full object-contain object-left"
+                  src={assets.logoNav}
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
               </div>
               <span className="font-display text-3xl font-bold tracking-[0.02em] md:text-4xl">Bulbul Hardcase</span>
             </div>
