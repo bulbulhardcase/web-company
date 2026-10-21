@@ -505,7 +505,7 @@ function CtaSection() {
       <div className="pointer-events-none absolute inset-0" aria-hidden>
         <img
           alt=""
-          className="absolute inset-0 h-full w-full max-w-none object-cover object-center"
+className="absolute inset-0 h-full w-full max-w-none object-contain object-center md:object-cover"
           src={assets.ctaBottom}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-black/55 to-black/35" />
