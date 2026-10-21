@@ -93,7 +93,7 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
           className={`nav-glass flex items-center justify-between gap-3 rounded-[6px] px-4 py-3 shadow-[0px_2px_10px_0px_rgba(0,0,0,0.12)] md:py-4 ${scrolled ? "ring-1 ring-white/10" : "ring-1 ring-white/5"}`}
           style={{ backgroundColor: scrolled ? "rgba(24,24,24,0.65)" : "rgba(171,171,171,0.1)" }}
         >
-          <a href="#" className="flex min-w-0 flex-1 items-center gap-2.5 md:flex-none">
+          <a href="#main" aria-label="BulBul Hardcase home" className="flex min-w-0 flex-1 items-center gap-2.5 md:flex-none">
             <div className="relative h-14 w-44 shrink-0 flex items-center">
   <img
     alt="Bulbul Hardcase"
@@ -517,8 +517,8 @@ function CtaSection() {
 function Footer() {
   const { t } = useI18n();
   const company = [
-    { label: t("footerAbout"), href: "#" },
-    { label: t("footerProcess"), href: "#" },
+    { label: t("footerAbout"), href: "#problem" },
+    { label: t("footerProcess"), href: "#how-it-works" },
     { label: t("footerContact"), href: "#contact" },
   ];
   const industry = [
@@ -527,7 +527,7 @@ function Footer() {
     t("footerMusic"),
     t("footerInd"),
     t("footerOffice"),
-  ];
+  ].map((label) => ({ label, href: "#products" }));
 
   return (
     <footer
@@ -570,9 +570,9 @@ function Footer() {
             <p className="text-[10px] uppercase tracking-[0.5px] text-white/55">{t("footerIndustry")}</p>
             <ul className="space-y-2.5">
               {industry.map((l) => (
-                <li key={l}>
-                  <a href="#" className="link-sweep inline-block min-h-[44px] py-2.5 text-base text-white/90 transition-colors hover:text-white">
-                    {l}
+                <li key={l.label}>
+                  <a href={l.href} className="link-sweep inline-block min-h-[44px] py-2.5 text-base text-white/90 transition-colors hover:text-white">
+                    {l.label}
                   </a>
                 </li>
               ))}
