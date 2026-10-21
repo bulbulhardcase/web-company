@@ -136,12 +136,22 @@ export function SupportChat() {
         data-support-fab
         onClick={() => setOpen((v) => !v)}
       >
-        <img alt="" className="pointer-events-none absolute inset-0 block size-full max-w-none rounded-full object-cover" src={assets.supportFabBg} />
-        <span className="pointer-events-none absolute left-[22%] right-[22%] top-3.5 aspect-square overflow-hidden">
-          <span className="absolute inset-[12.5%_8.33%] block">
-            <img alt="" className="absolute inset-0 block size-full max-w-none" src={assets.supportFabIcon} />
-          </span>
-        </span>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="pointer-events-none mx-auto size-8"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-3.5 2v-5A7.5 7.5 0 1 1 20 11.5Z"
+            stroke="white"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path d="M8 11.5h8M8 14.5h5" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+        </svg>
       </button>
 
       {open ? (
