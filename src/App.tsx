@@ -194,7 +194,8 @@ function Hero() {
       {/* Background: `assets.hero` — locked; do not replace without explicit approval */}
       <img
         alt=""
-        className="pointer-events-none absolute inset-0 z-0 size-full max-w-none object-cover"
+       
+className="pointer-events-none absolute inset-0 z-0 size-full max-w-none object-cover object-[center_35%] md:object-center"
         src={assets.hero}
       />
       <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/50 via-black/40 to-[#0a0a0a]/88" aria-hidden />
