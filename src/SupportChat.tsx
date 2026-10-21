@@ -128,12 +128,10 @@ export function SupportChat() {
         type="button"
         className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-[200] block size-16 cursor-pointer rounded-full shadow-[0_10px_32px_-10px_rgba(248,67,0,0.5)] transition-[transform,box-shadow] duration-300 hover:scale-[1.04] hover:shadow-[0_14px_40px_-10px_rgba(248,67,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 md:bottom-[max(2.5rem,env(safe-area-inset-bottom))] md:right-[max(2.5rem,env(safe-area-inset-right))]"
         style={{ backgroundColor: brand }}
-        aria-expanded={open}
-        aria-controls={panelId}
-        aria-label={t("supportFabAria")}
+        aria-label="Hubungi BulBul Hardcase via WhatsApp"
         data-node-id="109:1565"
         data-support-fab
-        onClick={() => setOpen((v) => !v)}
+        onClick={() => window.open("https://wa.me/6285782242101", "_blank", "noopener,noreferrer")}
       >
         <svg
           aria-hidden="true"
