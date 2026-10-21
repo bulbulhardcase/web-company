@@ -285,17 +285,14 @@ function EngineeredSection() {
   const { t } = useI18n();
   const features = [
     {
-      icon: assets.feature1,
       title: t("engineeredF1Title"),
       body: t("engineeredF1Body"),
     },
     {
-      icon: assets.feature2,
       title: t("engineeredF2Title"),
       body: t("engineeredF2Body"),
     },
     {
-      icon: assets.feature3,
       title: t("engineeredF3Title"),
       body: t("engineeredF3Body"),
     },
@@ -326,8 +323,24 @@ function EngineeredSection() {
         <div className="mt-14 grid w-full gap-10 md:grid-cols-3 md:gap-10 lg:px-0 lg:py-[50px]">
           {features.map((f, i) => (
             <Reveal key={f.title} className="flex flex-col items-start gap-4 text-left" delayMs={80 + i * 70}>
-              <div className="size-14 shrink-0 transition-transform duration-500 hover:rotate-[-4deg] hover:scale-105">
-                <img alt="" className="size-full" src={f.icon} />
+              <div className="flex size-14 shrink-0 items-center justify-center text-[#f84300] transition-transform duration-500 hover:rotate-[-4deg] hover:scale-105" aria-hidden="true">
+                {i === 0 ? (
+                  <svg viewBox="0 0 56 56" className="size-full" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M28 5 48 16v24L28 51 8 40V16L28 5Z" />
+                    <path d="m8 16 20 12 20-12M28 28v23M18 10l20 12" />
+                  </svg>
+                ) : i === 1 ? (
+                  <svg viewBox="0 0 56 56" className="size-full" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M10 18h36v27H10zM6 12h44M17 7v10M28 7v10M39 7v10" />
+                    <path d="M17 29h22M17 36h22" />
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 56 56" className="size-full" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M8 12h40v32H8zM14 18h28v20H14z" />
+                    <path d="m20 32 6-7 5 5 5-6" />
+                    <circle cx="38" cy="22" r="2" />
+                  </svg>
+                )}
               </div>
               <h3 className="text-lg font-semibold uppercase tracking-[1.8px] text-white/95">{f.title}</h3>
               <p className="text-base font-light leading-[26px] text-white/80">{f.body}</p>
