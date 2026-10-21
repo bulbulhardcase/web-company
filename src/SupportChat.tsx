@@ -123,23 +123,21 @@ export function SupportChat() {
 
   return (
     <>
-      {/* Figma 109:1565 — AI Chat / customer support agent trigger */}
+     ```tsx
+      {/* Tombol WhatsApp bisnis */}
       <button
         type="button"
-        className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom))] right-[max(1.5rem,env(safe-area-inset-right))] z-[200] block size-16 cursor-pointer rounded-full shadow-[0_10px_32px_-10px_rgba(248,67,0,0.5)] transition-[transform,box-shadow] duration-300 hover:scale-[1.04] hover:shadow-[0_14px_40px_-10px_rgba(248,67,0,0.55)] focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 md:bottom-[max(2.5rem,env(safe-area-inset-bottom))] md:right-[max(2.5rem,env(safe-area-inset-right))]"
-        style={{ backgroundColor: brand }}
+        className="fixed bottom-6 right-6 z-[200] flex size-14 items-center justify-center rounded-full bg-[#25D366] shadow-lg transition-transform hover:scale-105 md:bottom-10 md:right-10"
         aria-label="Hubungi BulBul Hardcase via WhatsApp"
-        data-node-id="109:1565"
-        data-support-fab
-        onClick={() => window.open("https://wa.me/6285782242101", "_blank", "noopener,noreferrer")}
+        onClick={() =>
+          window.open(
+            "https://wa.me/6285782242101",
+            "_blank",
+            "noopener,noreferrer"
+          )
+        }
       >
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          fill="none"
-          className="pointer-events-none mx-auto size-8"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+        <svg viewBox="0 0 24 24" fill="none" className="size-7" aria-hidden="true">
           <path
             d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-3.5 2v-5A7.5 7.5 0 1 1 20 11.5Z"
             stroke="white"
@@ -147,8 +145,36 @@ export function SupportChat() {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <path d="M8 11.5h8M8 14.5h5" stroke="white" strokeWidth="1.8" strokeLinecap="round" />
+          <path
+            d="M8 11.5h8M8 14.5h5"
+            stroke="white"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+          />
         </svg>
+      </button>
+
+      {/* Tombol AI Support Chat */}
+      <button
+        type="button"
+        className="fixed bottom-24 right-6 z-[200] flex size-14 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 md:bottom-32 md:right-10"
+        style={{ backgroundColor: brand }}
+        aria-label={t("supportTitle")}
+        aria-expanded={open}
+        aria-controls={panelId}
+        data-support-fab
+        onClick={() => setOpen((v) => !v)}
+      >
+        {open ? (
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" className="size-7" aria-hidden="true">
+            <path d="m6 6 12 12M18 6 6 18" />
+          </svg>
+        ) : (
+          <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.8" className="size-7" aria-hidden="true">
+            <path d="M20 11.5a7.5 7.5 0 0 1-7.5 7.5H7l-3.5 2v-5A7.5 7.5 0 1 1 20 11.5Z" />
+            <path d="M8 11.5h8M8 14.5h5" />
+          </svg>
+        )}
       </button>
 
       {open ? (
