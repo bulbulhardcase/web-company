@@ -133,7 +133,21 @@ function NavBar({ scrolled }: { scrolled: boolean }) {
               aria-label={mobileOpen ? t("closeMenu") : t("openMenu")}
               onClick={() => setMobileOpen((o) => !o)}
             >
-              <img alt="" className="block h-5 w-[30px]" src={assets.menuIcon} />
+              
+<svg
+  aria-hidden="true"
+  className="block h-5 w-[30px]"
+  viewBox="0 0 30 20"
+  fill="none"
+>
+  <path
+    d="M2 2H28M2 10H28M2 18H28"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+  />
+</svg>
+
             </button>
           </div>
         </div>
