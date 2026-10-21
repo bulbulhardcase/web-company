@@ -1,5 +1,4 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
-import { assets } from "./figma-assets";
 import { stripMarkdownForChat } from "./chatPlainText";
 import { getDictionary } from "./i18n/dictionary";
 import { getInitialLocale } from "./i18n/locale-storage";
