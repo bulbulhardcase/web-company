@@ -176,7 +176,8 @@ export function SupportChat() {
           role="dialog"
           aria-modal="true"
           aria-label={t("supportDialog")}
-          className="fixed bottom-[calc(1.5rem+4rem+12px+env(safe-area-inset-bottom,0px))] right-[max(1.5rem,env(safe-area-inset-right))] z-[199] flex w-[min(100vw-2rem,400px)] flex-col overflow-hidden rounded-lg border border-white/10 bg-[#0e0e0e]/95 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl md:bottom-[calc(2.5rem+4rem+12px+env(safe-area-inset-bottom,0px))] md:right-[max(2.5rem,env(safe-area-inset-right))]"
+          
+className="fixed bottom-[calc(1.5rem+4rem+12px+env(safe-area-inset-bottom,0px))] right-[max(1.5rem,env(safe-area-inset-right))] z-[199] flex max-h-[min(70dvh,600px)] w-[min(100vw-2rem,400px)] flex-col overflow-hidden rounded-lg border border-white/10 bg-[#0e0e0e]/95 shadow-[0_24px_80px_-24px_rgba(0,0,0,0.9)] backdrop-blur-xl md:bottom-[calc(2.5rem+4rem+12px+env(safe-area-inset-bottom,0px))] md:right-[max(2.5rem,env(safe-area-inset-right))] md:max-h-[min(75dvh,700px)]"
         >
           <div className="flex items-center justify-between gap-2 border-b border-white/10 px-4 py-3" style={{ backgroundColor: "rgba(248,67,0,0.12)" }}>
             <div>
