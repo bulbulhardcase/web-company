@@ -150,7 +150,11 @@ export function SupportChat() {
       {/* Tombol AI Support Chat */}
       <button
         type="button"
-        className="fixed bottom-24 right-6 z-[200] flex size-14 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 md:bottom-32 md:right-10"
+        className={`fixed right-6 z-[200] flex size-14 items-center justify-center rounded-full shadow-lg transition-transform hover:scale-105 md:right-10 ${
+  open
+    ? "bottom-[calc(1.5rem+4rem+12px+env(safe-area-inset-bottom,0px))] md:bottom-[calc(2.5rem+4rem+12px+env(safe-area-inset-bottom,0px))]"
+    : "bottom-24 md:bottom-32"
+}`}
         style={{ backgroundColor: brand }}
         aria-label={t("supportTitle")}
         aria-expanded={open}
