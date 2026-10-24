@@ -41,8 +41,8 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
       role="radio"
       aria-checked={locale === code}
       tabIndex={locale === code ? 0 : -1}
-      className={`relative z-10 min-h-[44px] min-w-[2.75rem] cursor-pointer rounded px-2.5 text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white/60 ${
-        locale === code ? "bg-white/20 text-white" : "text-white/70 hover:bg-white/10 hover:text-white"
+      className={`relative z-10 min-h-[44px] min-w-[2.75rem] cursor-pointer rounded-full px-2.5 text-xs font-semibold transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy ${
+        locale === code ? "bg-navy text-white" : "text-ink hover:bg-mist"
       }`}
       onClick={() => select(code)}
       onKeyDown={(e) => onKeyDown(e, code)}
@@ -53,7 +53,7 @@ export function LanguageToggle({ className = "" }: { className?: string }) {
 
   return (
     <div
-      className={`pointer-events-auto relative z-10 inline-flex items-stretch rounded-md border border-white/15 p-0.5 text-xs font-semibold ${className}`}
+      className={`pointer-events-auto relative z-10 inline-flex items-stretch rounded-full border border-line p-0.5 text-xs font-semibold ${className}`}
       role="radiogroup"
       aria-label={t("langSwitcher")}
     >

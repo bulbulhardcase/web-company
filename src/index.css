@@ -1,14 +1,16 @@
 @import "tailwindcss";
 
+/* Corporate light theme (DSV-style layout) in the logo's own navy + red. */
 @theme {
   --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  /* Display stack matches sans for maximum legibility (single humanist sans family) */
   --font-display: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
-  --color-brand: #f84300;
-  --color-surface: #0a0a0a;
-  --color-surface-elevated: #0e0e0e;
-  --color-card: #131313;
-  --color-accent-muted: #adc6ff;
+  --color-navy: #0b1a4f;
+  --color-navy-hover: #142a75;
+  --color-accent: #a8000f;
+  --color-ink: #181818;
+  --color-muted: #5a5f6b;
+  --color-mist: #f3f4f6;
+  --color-line: #d9dce3;
 }
 
 html {
@@ -26,31 +28,8 @@ html {
 body {
   margin: 0;
   font-family: var(--font-sans);
-  background-color: var(--color-surface);
-  color: #fff;
-  position: relative;
-}
-
-/* Film grain + vignette: industrial depth without heavy assets */
-body::before {
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 50;
-  opacity: 0.055;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-}
-
-body::after {
-  content: "";
-  pointer-events: none;
-  position: fixed;
-  inset: 0;
-  z-index: 49;
-  background: radial-gradient(ellipse 120% 80% at 50% -20%, rgba(248, 67, 0, 0.07), transparent 55%),
-    radial-gradient(ellipse 80% 50% at 100% 50%, rgba(173, 198, 255, 0.03), transparent 45%);
+  background-color: #fff;
+  color: var(--color-ink);
 }
 
 .font-display {
@@ -60,20 +39,19 @@ body::after {
 /* Scroll reveal */
 .reveal-motion {
   transition:
-    opacity 0.78s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.78s cubic-bezier(0.22, 1, 0.36, 1);
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
   transition-delay: var(--reveal-delay, 0ms);
-  will-change: opacity, transform;
 }
 
 .reveal-motion--out {
   opacity: 0;
-  transform: translate3d(0, 2.25rem, 0);
+  transform: translate3d(0, 1.5rem, 0);
 }
 
 .reveal-motion--in {
   opacity: 1;
-  transform: translate3d(0, 0, 0);
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -83,100 +61,5 @@ body::after {
   .reveal-motion--out {
     opacity: 1;
     transform: none;
-  }
-}
-
-/* Hero stagger (above the fold) */
-.hero-rise {
-  animation: hero-rise 0.95s cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes hero-rise {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 28px, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-rise {
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-}
-
-/* Nav sheen */
-@keyframes nav-sheen {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.nav-glass {
-  background: linear-gradient(120deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02) 45%, rgba(255, 255, 255, 0.08));
-  background-size: 200% 200%;
-  animation: nav-sheen 14s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .nav-glass {
-    animation: none;
-  }
-}
-
-/* Hero → Problem: soft gradient + backdrop blur (feathered mask for smooth edge) */
-.hero-problem-bridge {
-  background: linear-gradient(
-    to bottom,
-    rgba(10, 10, 10, 0) 0%,
-    rgba(10, 10, 10, 0.12) 22%,
-    rgba(10, 10, 10, 0.45) 55%,
-    rgba(10, 10, 10, 0.88) 82%,
-    #0a0a0a 100%
-  );
-  -webkit-backdrop-filter: blur(14px) saturate(1.08);
-  backdrop-filter: blur(14px) saturate(1.08);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 10%, black 22%, black 100%);
-  mask-image: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.45) 10%, black 22%, black 100%);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-problem-bridge {
-    -webkit-backdrop-filter: blur(4px);
-    backdrop-filter: blur(4px);
-  }
-}
-
-/* Link underline sweep */
-.link-sweep {
-  position: relative;
-  text-decoration: none;
-}
-.link-sweep::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: -2px;
-  width: 100%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-brand), transparent);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* Hover-only underline: touch devices keep taps predictable (responsive-design / WCAG) */
-@media (hover: hover) and (pointer: fine) {
-  .link-sweep:hover::after {
-    transform: scaleX(1);
   }
 }
