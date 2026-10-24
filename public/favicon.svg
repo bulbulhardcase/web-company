@@ -1,8 +1,8 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 499 492">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <title>BulBul Hardcase</title>
-  <g fill="#c9000b">
-    <path d="M231 15 230 265 21 364 21 106Z"/>
-    <path d="M255 15 466 106 465 364 254 265Z"/>
-    <path d="M243 285 451 385 243 484 36 385Z"/>
-  </g>
+  <mask id="m">
+    <path fill="#fff" d="M32 2 58 17v30L32 62 6 47V17Z"/>
+    <path fill="none" stroke="#000" stroke-width="4" d="M32 0v32L4 48M32 32l28 16"/>
+  </mask>
+  <path fill="#a7010c" mask="url(#m)" d="M32 2 58 17v30L32 62 6 47V17Z"/>
 </svg>
